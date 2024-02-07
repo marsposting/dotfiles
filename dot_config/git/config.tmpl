@@ -1,0 +1,7 @@
+[user]
+  name = {{ .git.name }}
+  email = {{ .git.email }}
+[core]
+  editor = {{ if eq .editor "code" }}"code --wait"{{ else }}{{ .editor }}{{ end }}
+[init]
+  defaultBranch = main
