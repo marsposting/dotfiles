@@ -1,0 +1,13 @@
+function asdf_install_latest
+  set -x language $argv[1]
+  if test -z (asdf current $language)
+    asdf plugin add "$language"
+    asdf install "$language" latest
+    asdf global "$language" latest
+    asdf reshim "$language"
+  end
+end
+
+function daily_refresh
+  brew update; and brew upgrade
+end

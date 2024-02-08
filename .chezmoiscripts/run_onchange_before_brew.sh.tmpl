@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+set -eufo pipefail
+
+{{ $brews := list
+     "bat"
+     "curl"
+     "eza"
+     "fd"
+     "gdu"
+     "gh"
+     "git"
+     "gnupg"
+     "go"
+     "jq"
+     "ripgrep"
+     "wget"
+     "xz"
+     "yt-dlp" -}}
+
+{{ $casks := list
+     "iterm2"
+     "iina"
+     "transmission"
+     "zed" -}}
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+EOF

@@ -1,0 +1,22 @@
+.config/iterm/com.googlecode.iterm2.plist
+README.md
+
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+Library
+dot_config/iterm
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
+.hushlogin
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+.chezmoiscripts/windows/**
+Documents
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.hushlogin
+{{ end }}

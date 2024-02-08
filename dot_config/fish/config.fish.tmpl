@@ -13,6 +13,10 @@ set fish_greeting
 fish_add_path "{{ .homebrew.prefix }}/bin"
 {{- end }}
 
+source "{{ .xdg.config_home }}/fish/vars.fish"
+source "{{ .xdg.config_home }}/fish/functions.fish"
+source "{{ .xdg.config_home }}/fish/aliases.fish"
+
 # Set vi mode
 fish_vi_key_bindings
 
