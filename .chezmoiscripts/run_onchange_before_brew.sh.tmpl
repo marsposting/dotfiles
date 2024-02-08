@@ -4,28 +4,44 @@ set -eufo pipefail
 
 {{ $brews := list
      "bat"
+     "chezmoi"
      "curl"
      "eza"
      "fd"
+     "fzf"
      "gdu"
      "gh"
      "git"
      "gnupg"
      "go"
      "jq"
+     "lazygit"
+     "mas"
      "ripgrep"
      "wget"
      "xz"
      "yt-dlp" -}}
 
 {{ $casks := list
-     "iterm2"
-     "iina"
-     "transmission"
-     "zed" -}}
+    "appcleaner"
+    "iterm2-beta"
+    "iina"
+    "transmission"
+    "zed" -}}
+
+{{ $taps := list
+    "jimeh/emacs-builds"
+    "homebrew/cask-fonts"
+    "homebrew/cask-versions" -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range ($taps | sortAlpha | uniq) -}}
+tap "{{ . }}"
+{{ end -}}
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
 {{ end -}}
 EOF

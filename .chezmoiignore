@@ -1,8 +1,8 @@
-.config/iterm/com.googlecode.iterm2.plist
 README.md
 
 {{ if ne .chezmoi.os "darwin" }}
 .chezmoiscripts/darwin/**
+.config/iterm2/Atom.itermcolors
 Library
 dot_config/iterm
 {{ end }}

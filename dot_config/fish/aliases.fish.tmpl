@@ -15,8 +15,8 @@ alias brci='bi --cask'
 alias brcu='bu --cask'
 alias brcz='bu --cask --zap'
 alias bbun='b bundle'
-alias bbunc='HOMEBREW_BUNDLE_FILE="$HOME/Library/Preferences/Brewfile" bbun install --cleanup'
-alias bbuni='HOMEBREW_BUNDLE_FILE="$HOME/Library/Preferences/Brewfile" bbun install'
+# alias bbunc='HOMEBREW_BUNDLE_FILE="$HOME/Library/Preferences/Brewfile" bbun install --cleanup'
+# alias bbuni='HOMEBREW_BUNDLE_FILE="$HOME/Library/Preferences/Brewfile" bbun install'
 alias ci='bi --cask'
 alias cu='bu --cask --zap'
 
@@ -25,6 +25,10 @@ alias e='{{ .editor }}'
 alias g='git'
 alias gaa='g add -A'
 alias gcm='g commit -m'
+alias gac='g add -A && git commit -m'
+alias gco='g checkout'
+alias glog="g log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gs='g status -sb'
 
 alias l='ls -a'
 
