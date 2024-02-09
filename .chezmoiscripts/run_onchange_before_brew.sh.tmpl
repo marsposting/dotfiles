@@ -12,11 +12,13 @@ set -eufo pipefail
      "gdu"
      "gh"
      "git"
+     "git-delta"
      "gnupg"
      "go"
      "jq"
      "lazygit"
      "mas"
+     "neovim"
      "ripgrep"
      "wget"
      "xz"
@@ -24,13 +26,14 @@ set -eufo pipefail
 
 {{ $casks := list
     "appcleaner"
-    "iterm2-beta"
     "iina"
+    "font-jetbrains-mono-nerd-font"
+    "obsidian"
     "transmission"
+    "wezterm"
     "zed" -}}
 
 {{ $taps := list
-    "jimeh/emacs-builds"
     "homebrew/cask-fonts"
     "homebrew/cask-versions" -}}
 

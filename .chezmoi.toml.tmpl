@@ -5,7 +5,7 @@
 {{-   $headless = true -}}
 {{- end -}}
 [data]
-  editor          = "{{ promptStringOnce . "editor" "Primary editor" "zed" }}"
+  editor          = "{{ promptStringOnce . "editor" "Primary editor (emacs, nvim, zed)" "emacs" }}"
   interactive     = {{ stdinIsATTY }}
   transient       = {{ $transient }}
 
