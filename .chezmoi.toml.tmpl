@@ -1,40 +1,41 @@
-{{- $transient := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */}}
-{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */}}
+{{- $transient := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */ -}}
+{{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */ -}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
 {{-   $transient = true -}}
 {{-   $headless = true -}}
 {{- end -}}
 [data]
-  editor          = "{{ promptStringOnce . "editor" "Primary editor (emacs, nvim, zed)" "emacs" }}"
-  interactive     = {{ stdinIsATTY }}
-  transient       = {{ $transient }}
+editor          = "{{ promptStringOnce . "editor" "Primary editor (nvim, zed)" "nvim" }}"
+interactive     = {{ stdinIsATTY }}
+transient       = {{ $transient }}
 
 [data.git]
-  name            = "{{ promptStringOnce . "git.name" "Git name" "marsposting" }}"
-  email           = "{{ promptStringOnce . "git.email" "Git email" "code@bisnem.maskmy.id" }}"
+name            = "{{ promptStringOnce . "git.name" "Git name" "marsposting" }}"
+email           = "{{ promptStringOnce . "git.email" "Git email" "code@bisnem.maskmy.id" }}"
 
 [data.homebrew]
-  prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
+prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
 
 [data.profiles]
-  server          = false
-  gaming          = false
+development     = true
+server          = false
+gaming          = false
 
 [data.xdg]
-  bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
-  cache_home      = "{{ .chezmoi.homeDir }}/.cache"
-  config_home     = "{{ .chezmoi.homeDir }}/.config"
-  data_home       = "{{ .chezmoi.homeDir }}/.local/share"
-  state_home      = "{{ .chezmoi.homeDir }}/.local/state"
+bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
+cache_home      = "{{ .chezmoi.homeDir }}/.cache"
+config_home     = "{{ .chezmoi.homeDir }}/.config"
+data_home       = "{{ .chezmoi.homeDir }}/.local/share"
+state_home      = "{{ .chezmoi.homeDir }}/.local/state"
 
 [data.shells]
-  zdotdir         = "{{ .chezmoi.homeDir }}/.config/zsh"
-  fdotdir         = "{{ .chezmoi.homeDir }}/.config/fish"
+zdotdir         = "{{ .chezmoi.homeDir }}/.config/zsh"
+fdotdir         = "{{ .chezmoi.homeDir }}/.config/fish"
 
 [data.toolchains]
-  ai              = false
-  golang          = false
-  javascript      = false
-  python          = true
-  ruby            = false
-  shell           = false
+ai              = false
+golang          = false
+javascript      = false
+python          = true
+ruby            = false
+shell           = false
