@@ -1,13 +1,16 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 set -eufo pipefail
 
 {{ $brews := list
+     "asdf"
      "bat"
      "chezmoi"
+     "coreutils"
      "curl"
      "eza"
      "fd"
+     "fish"
      "fzf"
      "gdu"
      "gh"
@@ -20,18 +23,34 @@ set -eufo pipefail
      "mas"
      "neovim"
      "ripgrep"
+     "tealdeer"
      "wget"
      "xz"
-     "yt-dlp" -}}
+     "yt-dlp"
+     "zoxide" -}}
 
 {{ $casks := list
     "appcleaner"
+    "brave-browser-beta"
     "iina"
-    "font-jetbrains-mono-nerd-font"
-    "obsidian"
+    "neovide"
+    "raycast"
     "transmission"
-    "wezterm"
-    "zed" -}}
+    "wezterm" -}}
+
+{{ $fonts := list
+    "font-ibm-plex-mono"
+    "font-jetbrains-mono-nerd-font"
+    "font-ia-writer-duospace"
+    "font-ia-writer-quattro" -}}
+
+{{ $gamingApps := list 
+    "gog-galaxy"
+    "league-of-legends"
+    "steam" -}}
+
+{{ $mediaUtils := list 
+    "ffmpeg" -}}
 
 {{ $taps := list
     "homebrew/cask-fonts"
@@ -41,10 +60,22 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}
 tap "{{ . }}"
 {{ end -}}
+
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
+
+{{ if .profiles.gaming -}}
+{{   range ($gamingApps | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{   end -}}
+{{ end -}}
+
 {{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+
+{{ range ($fonts | sortAlpha | uniq) -}}
 cask "{{ . }}"
 {{ end -}}
 EOF

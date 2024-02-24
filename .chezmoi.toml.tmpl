@@ -19,7 +19,8 @@ prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/
 [data.profiles]
 development     = true
 server          = false
-gaming          = false
+gaming          = true
+work            = false
 
 [data.xdg]
 bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
@@ -27,6 +28,9 @@ cache_home      = "{{ .chezmoi.homeDir }}/.cache"
 config_home     = "{{ .chezmoi.homeDir }}/.config"
 data_home       = "{{ .chezmoi.homeDir }}/.local/share"
 state_home      = "{{ .chezmoi.homeDir }}/.local/state"
+
+[data.apps]
+browser         = "{{ promptStringOnce . "apps.browser" "Browser (arc, brave, safari)" "brave" }}"
 
 [data.shells]
 zdotdir         = "{{ .chezmoi.homeDir }}/.config/zsh"
