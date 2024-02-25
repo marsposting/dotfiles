@@ -5,24 +5,18 @@ set -eufo pipefail
 {{ $brews := list
      "asdf"
      "bat"
-     "chezmoi"
      "coreutils"
      "curl"
      "eza"
      "fd"
      "fish"
-     "fzf"
      "gdu"
-     "gh"
      "git"
-     "git-delta"
      "gnupg"
-     "go"
      "jq"
      "lazygit"
      "mas"
      "neovim"
-     "ripgrep"
      "tealdeer"
      "wget"
      "xz"
@@ -50,7 +44,8 @@ set -eufo pipefail
     "steam" -}}
 
 {{ $mediaUtils := list 
-    "ffmpeg" -}}
+    "ffmpeg"
+    "calibre" -}}
 
 {{ $taps := list
     "homebrew/cask-fonts"

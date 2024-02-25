@@ -13,7 +13,13 @@
 .python
 .python_history
 .pyenv
+.tmux-statusline-colors.conf
+.tmux.conf
 .viminfo
+.zcompdump*
+.zlogin
+.zprofile
+.zshrc
 .zsh_history
 .zsh_sessions
 bin/
