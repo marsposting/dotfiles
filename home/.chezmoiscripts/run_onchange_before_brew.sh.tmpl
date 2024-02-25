@@ -43,13 +43,29 @@ set -eufo pipefail
     "league-of-legends"
     "steam" -}}
 
-{{ $mediaUtils := list 
-    "ffmpeg"
+{{ $mediaBrews := list
+  (dict "name" "homebrew-ffmpeg/ffmpeg/ffmpeg" "args" (list "with-chromaprint"))
+  (dict "name" "chromaprint")
+-}}
+
+{{ $mediaCasks := list 
     "calibre" -}}
 
 {{ $taps := list
     "homebrew/cask-fonts"
     "homebrew/cask-versions" -}}
+
+{{ $mediaTaps := list 
+     "homebrew-ffmpeg/ffmpeg" -}}
+
+{{ if .profiles.gaming -}}
+{{   $casks = concat $casks $gamingApps -}}
+{{ end -}}
+
+{{ if .profiles.server -}}
+{{   $taps  = concat $taps $mediaTaps }}
+{{   $casks = concat $casks $mediaCasks }}
+{{ end -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range ($taps | sortAlpha | uniq) -}}
@@ -60,17 +76,15 @@ tap "{{ . }}"
 brew "{{ . }}"
 {{ end -}}
 
-{{ if .profiles.gaming -}}
-{{   range ($gamingApps | sortAlpha | uniq) -}}
-cask "{{ . }}"
-{{   end -}}
-{{ end -}}
-
 {{ range ($casks | sortAlpha | uniq) -}}
 cask "{{ . }}"
 {{ end -}}
 
-{{ range ($fonts | sortAlpha | uniq) -}}
-cask "{{ . }}"
+{{ if .profiles.server -}}
+{{   range $brew := $mediaBrews -}}
+{{- $name := (index $brew "name") -}}
+{{- $args := (index $brew "args" | default (list)) -}}
+brew "{{ $name }}"{{ if $args }}, args: [{{ range $arg := $args }}"{{ $arg }}"{{ if not (eq $arg (index $args (sub (len $args) 1))) }}, {{ end }}{{ end }}]{{ end }}
+{{   end -}}
 {{ end -}}
 EOF
