@@ -31,6 +31,7 @@ state_home      = "{{ .chezmoi.homeDir }}/.local/state"
 
 [data.apps]
 browser         = "{{ promptStringOnce . "apps.browser" "Browser (arc, brave, safari)" "brave" }}"
+pw_manager      = "{{ promptStringOnce . "apps.pw_manager" "Password manager (1Password)" "1password"}}"
 
 [data.shells]
 zdotdir         = "{{ .chezmoi.homeDir }}/.config/zsh"

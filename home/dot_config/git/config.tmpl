@@ -13,3 +13,13 @@
   conflictstyle = diff3
 [init]
   defaultBranch = main
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILbKI/JOFSI61U9rvwMJjnvWYEFTRhbkwZxgZ2n/2+zl
+[gpg]
+  format = ssh
+{{ if eq .chezmoi.os "darwin" -}}
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+{{ end -}}
+[commit]
+  gpgsign = true
