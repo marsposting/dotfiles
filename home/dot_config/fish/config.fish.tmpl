@@ -9,9 +9,12 @@ set -x FDOTDIR "{{ .xdg.config_home }}/fish"
 # Hush now, quiet now
 set fish_greeting
 
-fish_add_path "$XDG_BIN_HOME"
+fish_add_path "{{ .xdg.bin_home }}"
 {{ if eq .chezmoi.os "darwin" -}}
 fish_add_path "{{ .homebrew.prefix }}/bin"
+{{- end }}
+{{ if eq .editor "emacs" -}}
+fish_add_path "{{ .xdg.config_home }}/emacs/bin"
 {{- end }}
 
 source "{{ .xdg.config_home }}/fish/vars.fish"

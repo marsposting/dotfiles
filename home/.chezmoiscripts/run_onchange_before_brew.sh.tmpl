@@ -2,21 +2,33 @@
 
 set -eufo pipefail
 
+{{ $taps := list
+    "homebrew/cask-fonts"
+    "homebrew/cask-versions" -}}
+
 {{ $brews := list
      "asdf"
      "bat"
+     "cmake"
      "coreutils"
      "curl"
      "eza"
      "fd"
      "fish"
+     "fzf"
      "gdu"
+     "gh"
      "git"
+     "git-delta"
      "gnupg"
+     "helix"
      "jq"
      "lazygit"
      "mas"
-     "neovim"
+     "nushell"
+     "ripgrep"
+     "shellcheck"
+     "sqlite3"
      "tealdeer"
      "wget"
      "xz"
@@ -25,12 +37,21 @@ set -eufo pipefail
 
 {{ $casks := list
     "appcleaner"
-    "brave-browser-beta"
     "iina"
     "neovide"
     "raycast"
     "transmission"
     "wezterm" -}}
+
+
+{{ if eq .apps.browser "brave" -}}
+{{   $casks = concat $casks (list "brave-browser-beta") -}}
+{{ end -}}
+
+{{ if eq .editor "emacs" -}}
+{{   $taps = concat $taps (list "jimeh/emacs-builds") -}}
+{{   $casks = concat $casks (list "emacs-app-monthly") -}}
+{{ end -}}
 
 {{ $fonts := list
     "font-ibm-plex-mono"
@@ -45,15 +66,10 @@ set -eufo pipefail
 
 {{ $mediaBrews := list
   (dict "name" "homebrew-ffmpeg/ffmpeg/ffmpeg" "args" (list "with-chromaprint"))
-  (dict "name" "chromaprint")
--}}
+  (dict "name" "chromaprint") -}}
 
 {{ $mediaCasks := list 
     "calibre" -}}
-
-{{ $taps := list
-    "homebrew/cask-fonts"
-    "homebrew/cask-versions" -}}
 
 {{ $mediaTaps := list 
      "homebrew-ffmpeg/ffmpeg" -}}

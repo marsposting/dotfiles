@@ -1,0 +1,61 @@
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+
+(setq doom-theme 'doom-tokyo-night
+      doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 12))
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
+(add-to-list 'default-frame-alist '(width . 200))  ; width in characters
+(add-to-list 'default-frame-alist '(height . 65))  ; height in characters
+
+
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/"
+      org-roam-directory "~/org/"
+      org-roam-dailies-directory "~/org/journals/"
+      org-todo-keywords
+      '((sequence "TODO(t)" "STARTED(s)" "WAITING(w@/!)"
+         "DELEGATED(g@/!)" "DEFERRED(r)" "SOMEDAY(y)"
+         "|" "DONE(d@)" "CANCELED(x@)")))
+
+(after! org-capture
+  (setq org-capture-templates
+        `(("t" "task" entry (file+headline ,(expand-file-name "inbox.org" org-directory) "Tasks")
+           "* TODO %?")
+          ("w" "work task" entry (file+headline ,(expand-file-name "inbox.org" org-directory) "Work tasks")
+           "* TODO %?")
+          ("r" "reading" entry (file+headline ,(expand-file-name "inbox.org" org-directory) "Readings")
+           "* TODO %? %^G\n%U")
+          ("i" "idea" entry (file+headline ,(expand-file-name "inbox.org" org-directory) "Ideas")
+           "* %? %^G\n%U")
+          ("n" "note" entry (file+headline ,(expand-file-name "inbox.org" org-directory) "Notes")
+           "* %? %^G\n%U"))))
+
+(defun my/org-roam-file-name-generator (title)
+  "Generate a file with format: date--title__tags.org, prompting for tags."
+  (let* ((timestamp (format-time-string "%Y%m%dT%H%M%S"))
+         ;; Remove apostrophes and downcase the title
+         (sanitized-title (downcase (replace-regexp-in-string "'" "" title)))
+         ;; Prompt for tags using the preconfigured list
+         (selected-tags (completing-read-multiple "Select tags: " my/org-roam-preconfigured-tags))
+         ;; Convert list of tags to a string, if any are selected
+         (tag-string (if selected-tags (concat "__" (string-join selected-tags "_")) ""))
+         (file-name (concat timestamp "--" sanitized-title tag-string ".org")))
+    file-name))
+
+(setq org-roam-capture-templates
+      `(("n" "note" plain
+         (file ,(expand-file-name "templates/note.org" org-roam-directory))
+         :target (file "notes/%<%Y%m%dT%H%M%S>--${slug}.org")
+         :unnarrowed t)))
+
+(add-to-list 'auto-mode-alist '("\\.el\\.tmpl\\'" . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.fish\\.tmpl\\'" . fish-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(z\\)?sh\\.tmpl\\'" . sh-mode))
+
+(after! poetry
+  (remove-hook 'python-mode-hook #'poetry-tracking-mode)
+  (add-hook 'python-mode-hook 'poetry-track-virtualenv))

@@ -1,11 +1,11 @@
-{{- $transient := false -}}{{/* true if this machine is ephemeral, e.g. a cloud or VM instance */ -}}
+{{- $transient := false -}}{{/* true if this machine is a cloud or VM instance */ -}}
 {{/* detect GitHub codespaces, VSCode remote containers, Docker containers, Multipass VMs, and Vagrant boxes */ -}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
 {{-   $transient = true -}}
 {{-   $headless = true -}}
 {{- end -}}
 [data]
-editor          = "{{ promptStringOnce . "editor" "Primary editor (nvim, zed)" "nvim" }}"
+editor          = "{{ promptStringOnce . "editor" "Primary editor (emacs, nvim, zed)" "nvim" }}"
 interactive     = {{ stdinIsATTY }}
 transient       = {{ $transient }}
 
@@ -30,8 +30,14 @@ data_home       = "{{ .chezmoi.homeDir }}/.local/share"
 state_home      = "{{ .chezmoi.homeDir }}/.local/state"
 
 [data.apps]
+# browsers: arc, brave, safari
 browser         = "{{ promptStringOnce . "apps.browser" "Browser (arc, brave, safari)" "brave" }}"
+# music players: apple-music, plexamp
+music_player    = "{{ promptStringOnce . "apps.music_player" "Music player (apple-music, plexamp)" "apple-music"}}"
+# password managers: icloud-keychain, 1password
 pw_manager      = "{{ promptStringOnce . "apps.pw_manager" "Password manager (1Password)" "1password"}}"
+# terminals: iterm
+term            = "{{ promptStringOnce . "apps.term" "Terminal emulator (iterm, wezterm)" "iterm"}}"
 
 [data.shells]
 zdotdir         = "{{ .chezmoi.homeDir }}/.config/zsh"
