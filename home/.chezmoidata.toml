@@ -1,6 +1,6 @@
 [editors]
-emacs = true
-helix = true
+emacs = false
+helix = false
 neovim = false
 vscode = true
 zed = false
@@ -18,8 +18,11 @@ nushell = false
 
 [toolchains]
 ai = false
+cc = true
+hoon = false
 golang = false
 javascript = false
 python = true
 ruby = false
+rust = false
 shell = false

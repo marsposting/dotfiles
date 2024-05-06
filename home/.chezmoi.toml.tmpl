@@ -2,6 +2,7 @@
 interactive     = {{ stdinIsATTY }}
 transient       = false
 pw_manager      = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
+where           = {{ promptStringOnce . "where" "Location (work, home)" "home" | quote }}
 
 [data.git]
 name            = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
@@ -10,7 +11,7 @@ email           = {{ promptStringOnce . "git.email" "Git email" "user@user.local
 {{ if eq .chezmoi.os "darwin" -}}
 [data.homebrew]
 prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
-{{ end }}
+{{- end }}
 
 [data.xdg]
 bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
