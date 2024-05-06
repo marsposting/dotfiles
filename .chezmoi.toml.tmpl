@@ -1,6 +1,10 @@
 [data]
   interactive = {{ stdinIsATTY }}
 
+[data.git]
+  name            = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
+  email           = {{ promptStringOnce . "git.email" "Git email" "user@user.local" | quote }}
+
 {{ if eq .chezmoi.os "darwin" -}}
 [data.homebrew]
   prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
