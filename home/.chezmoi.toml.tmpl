@@ -20,3 +20,8 @@ cache_home      = "{{ .chezmoi.homeDir }}/.cache"
 config_home     = "{{ .chezmoi.homeDir }}/.config"
 data_home       = "{{ .chezmoi.homeDir }}/.local/share"
 state_home      = "{{ .chezmoi.homeDir }}/.local/state"
+
+[[textconv]]
+pattern = "**/*.plist"
+command = "plutil"
+args = ["-convert", "xml1", "-o", "-", "-"]
