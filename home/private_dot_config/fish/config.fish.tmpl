@@ -5,6 +5,7 @@ set -x XDG_DATA_HOME "{{ .xdg.data_home }}"
 set -x XDG_STATE_HOME "{{ .xdg.state_home }}"
 
 set -x FDOTDIR "{{ .xdg.config_home }}/fish"
+set -x DOTFILES "{{ .xdg.data_home }}/chezmoi"
 
 set fish_greeting
 
