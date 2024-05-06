@@ -1,0 +1,24 @@
+set -x XDG_BIN_HOME "{{ .xdg.bin_home }}"
+set -x XDG_CACHE_HOME "{{ .xdg.cache_home }}"
+set -x XDG_CONFIG_HOME "{{ .xdg.config_home }}"
+set -x XDG_DATA_HOME "{{ .xdg.data_home }}"
+set -x XDG_STATE_HOME "{{ .xdg.state_home }}"
+
+set -x FDOTDIR "{{ .xdg.config_home }}/fish"
+
+set fish_greeting
+
+{{ if eq .chezmoi.os "darwin" -}}
+fish_add_path "{{ .homebrew.prefix }}/bin"
+{{ end -}}
+
+# Set vi mode
+fish_vi_key_bindings
+
+source "{{ .xdg.config_home }}/fish/vars.fish"
+source "{{ .xdg.config_home }}/fish/functions.fish"
+source "{{ .xdg.config_home }}/fish/aliases.fish"
+
+if test -f "{{ .xdg.data_home }}/asdf/asdf.fish"
+  source "{{ .xdg.data_home }}/asdf/asdf.fish"
+end

@@ -1,0 +1,14 @@
+[data]
+  interactive = {{ stdinIsATTY }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+[data.homebrew]
+  prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
+{{ end }}
+
+[data.xdg]
+  bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
+  cache_home      = "{{ .chezmoi.homeDir }}/.cache"
+  config_home     = "{{ .chezmoi.homeDir }}/.config"
+  data_home       = "{{ .chezmoi.homeDir }}/.local/share"
+  state_home      = "{{ .chezmoi.homeDir }}/.local/state"

@@ -1,0 +1,16 @@
+set --prepend PATH {{ .homebrew.prefix }}/bin
+
+set -x LESSHISTFILE /dev/null
+
+set -Ux ASDF_DATA_DIR "{{ .xdg.data_home }}/asdf"
+set -Ux ASDF_DIR $ASDF_DATA_DIR
+set -Ux ASDF_CONFIG_FILE "{{ .xdg.config_home }}/asdf/asdfrc"
+# bug: this doesn't support full XDG path, needs manual specification
+# https://github.com/asdf-vm/asdf/issues/687
+set -Ux ASDF_PYTHON_DEFAULT_PACKAGES_FILE "{{ .xdg.config_home }}/asdf/default-python-packages"
+
+set -Ux MANWIDTH 88
+
+{{ if eq .chezmoi.os "darwin" -}}
+set -Ux HOMEBREW_NO_ANALYTICS 1
+{{- end }}
