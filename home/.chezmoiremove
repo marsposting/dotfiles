@@ -14,9 +14,6 @@
 .python_history
 .pyenv
 .viminfo
-{{ if not .editors.vscode }}
-.vscode
-{{ end }}
 .zsh_history
 .zsh_sessions
 bin/
