@@ -21,6 +21,8 @@ fish_vi_key_bindings
 source "{{ .xdg.config_home }}/fish/vars.fish"
 source "{{ .xdg.config_home }}/fish/functions.fish"
 source "{{ .xdg.config_home }}/fish/aliases.fish"
+source "{{ .xdg.config_home }}/fish/prompt.fish"
+
 
 {{ if stat (joinPath .xdg.bin_home "mise") -}}
 "{{ .xdg.bin_home }}/mise" activate fish | source
