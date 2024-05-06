@@ -1,0 +1,41 @@
+README.md
+install.sh
+.config/iterm2/_com.googlecode.iterm2.plist
+
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+.config/iterm2
+Library
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
+{{ end }}
+
+{{ if ne .chezmoi.os "windows" }}
+.chezmoiscripts/windows/**
+Documents
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.hushlogin
+{{ end }}
+
+{{ if not .editors.emacs }}
+.config/emacs
+.config/doom
+{{ end }}
+
+{{ if not .editors.neovim }}
+.config/nvim
+.local/state/nvim
+.local/share/nvim
+{{ end }}
+
+{{ if not .editors.helix }}
+.config/helix
+{{ end }}
+
+{{ if not .editors.vscode }}
+.vscode
+{{ end }}
