@@ -1,0 +1,30 @@
+# OUTPUT FORBIDDEN
+# zshenv is always sourced, even for bg jobs
+
+if [ -z "$ANA_INIT" ]; then
+  export ANA_SOURCE="$ANA_SOURCE -> .zshenv"
+  {{- if eq .chezmoi.arch "arm64" }}
+  path=("{{ .xdg.bin_home }}" /opt/homebrew/bin /usr/local/bin /usr/sbin /usr/bin /sbin /bin)
+  {{- else }}
+  path=("{{ .xdg.bin_home }}" /usr/local/bin /usr/sbin /usr/bin /sbin /bin)
+  {{- end }}
+  fpath=("{{ .xdg.bin_home }}" $fpath)
+  export ANA_INIT=1
+else
+  export ANA_SOURCE="$ANA_SOURCE -> .zshenv:skip-init"
+fi
+
+export XDG_BIN_HOME="{{ .xdg.bin_home }}"
+export XDG_CACHE_HOME="{{ .xdg.cache_home }}"
+export XDG_CONFIG_HOME="{{ .xdg.config_home }}"
+export XDG_DATA_HOME="{{ .xdg.data_home }}"
+export XDG_STATE_HOME="{{ .xdg.state_home }}"
+
+export DOTFILES="{{ .xdg.data_home }}/chezmoi"
+
+export ZDOTDIR="{{ .xdg.config_home }}/zsh"
+export ZSH_CACHE_DIR="{{ .xdg.cache_home }}/zsh"
+
+if [[ ! -d "{{ .xdg.cache_home }}/zsh" ]]; then
+  mkdir -p "{{ .xdg.cache_home }}/zsh"
+fi

@@ -1,0 +1,19 @@
+# zsh/.zshrc
+
+# sourced only on interactive/TTY
+# sourced when you type ZSH
+
+source "{{ .xdg.config_home }}/zsh/functions.zsh"
+
+autoload -Uz compinit
+
+# Requires EXTENDED_GLOB=true; run compinit once every 24 hours, not on demand
+if [[ -n "$ZSH_CACHE_DIR/zcompdump"(#qN.mh+24) ]]; then
+    compinit -i -d $ZSH_CACHE_DIR/zcompdump
+else
+    compinit -C -d $ZSH_CACHE_DIR/zcompdump
+fi
+
+{{ if lookPath "zoxide" -}}
+eval "$(zoxide init zsh)"
+{{ end -}}
