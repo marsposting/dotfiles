@@ -1,0 +1,25 @@
+[editors]
+emacs = true
+helix = true
+neovim = false
+vscode = true
+zed = false
+
+[profiles]
+developer = true
+gaming = false
+server = false
+work = false
+
+[shells]
+zsh = true
+fish = true
+nushell = false
+
+[toolchains]
+ai = false
+golang = false
+javascript = false
+python = true
+ruby = false
+shell = false

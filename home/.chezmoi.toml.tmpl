@@ -1,26 +1,20 @@
 [data]
-  interactive     = {{ stdinIsATTY }}
-  pw_manager      = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
-  transient       = false
+interactive     = {{ stdinIsATTY }}
+transient       = false
+pw_manager      = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
 
 [data.git]
-  name            = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
-  email           = {{ promptStringOnce . "git.email" "Git email" "user@user.local" | quote }}
+name            = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
+email           = {{ promptStringOnce . "git.email" "Git email" "user@user.local" | quote }}
 
 {{ if eq .chezmoi.os "darwin" -}}
 [data.homebrew]
-  prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
+prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
 {{ end }}
 
-[data.profiles]
-  developer       = true
-  gaming          = false
-  server          = false
-  work            = false  
-
 [data.xdg]
-  bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
-  cache_home      = "{{ .chezmoi.homeDir }}/.cache"
-  config_home     = "{{ .chezmoi.homeDir }}/.config"
-  data_home       = "{{ .chezmoi.homeDir }}/.local/share"
-  state_home      = "{{ .chezmoi.homeDir }}/.local/state"
+bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
+cache_home      = "{{ .chezmoi.homeDir }}/.cache"
+config_home     = "{{ .chezmoi.homeDir }}/.config"
+data_home       = "{{ .chezmoi.homeDir }}/.local/share"
+state_home      = "{{ .chezmoi.homeDir }}/.local/state"
