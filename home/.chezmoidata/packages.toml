@@ -4,6 +4,7 @@ brews = [
     "bat",
     "cmake",
     "coreutils",
+    "dockutil",
     "eza",
     "fd",
     "fish",
