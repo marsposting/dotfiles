@@ -1,6 +1,7 @@
 [data]
 interactive     = {{ stdinIsATTY }}
 transient       = false
+editor          = {{ promptStringOnce . "editor" "Primary editor (vscode, neovim, emacs)" "neovim" | quote}}
 pw_manager      = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
 where           = {{ promptStringOnce . "where" "Location (work, home)" "home" | quote }}
 

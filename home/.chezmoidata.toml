@@ -1,7 +1,7 @@
 [editors]
 emacs = false
 helix = false
-neovim = false
+neovim = true
 vscode = true
 zed = false
 
