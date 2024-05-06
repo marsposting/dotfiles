@@ -18,6 +18,6 @@ brews = [
     "tealdeer",
     "xz",
 ]
-casks = ["appcleaner", "iina", "iterm2@beta"]
+casks = ["appcleaner", "iina", "iterm2@beta", "secretive"]
 apps = []
 fonts = ["font-ibm-plex-mono", "font-jetbrains-mono-nerd-font"]
