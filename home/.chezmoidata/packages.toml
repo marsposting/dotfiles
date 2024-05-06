@@ -1,0 +1,22 @@
+[packages.darwin]
+taps = ["homebrew/cask-fonts", "homebrew/cask-versions"]
+brews = [
+    "bat",
+    "cmake",
+    "coreutils",
+    "eza",
+    "fd",
+    "fish",
+    "fzf",
+    "git",
+    "jq",
+    "mas",
+    "ripgrep",
+    "shellcheck",
+    "sqlite3",
+    "tealdeer",
+    "xz",
+]
+casks = ["appcleaner", "iina"]
+apps = []
+fonts = ["font-ibm-plex-mono", "font-jetbrains-mono-nerd-font"]

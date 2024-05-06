@@ -1,5 +1,6 @@
 [data]
   interactive     = {{ stdinIsATTY }}
+  pw_manager      = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
   transient       = false
 
 [data.git]
@@ -10,6 +11,12 @@
 [data.homebrew]
   prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
 {{ end }}
+
+[data.profiles]
+  developer       = true
+  gaming          = false
+  server          = false
+  work            = false  
 
 [data.xdg]
   bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
