@@ -2,6 +2,8 @@ set --prepend PATH {{ .homebrew.prefix }}/bin
 
 set -x LESSHISTFILE /dev/null
 
+set -Ux EDITOR {{ if eq .editor "vscode" }}"code --wait"{{ else }}"nvim"{{ end }}
+
 set -Ux ASDF_DATA_DIR "{{ .xdg.data_home }}/asdf"
 set -Ux ASDF_DIR $ASDF_DATA_DIR
 set -Ux ASDF_CONFIG_FILE "{{ .xdg.config_home }}/asdf/asdfrc"

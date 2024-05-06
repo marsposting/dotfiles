@@ -9,6 +9,8 @@ set -x DOTFILES "{{ .xdg.data_home }}/chezmoi"
 
 set fish_greeting
 
+fish_add_path "{{ .xdg.bin_home }}"
+
 {{ if eq .chezmoi.os "darwin" -}}
 fish_add_path "{{ .homebrew.prefix }}/bin"
 {{ end -}}
@@ -20,6 +22,6 @@ source "{{ .xdg.config_home }}/fish/vars.fish"
 source "{{ .xdg.config_home }}/fish/functions.fish"
 source "{{ .xdg.config_home }}/fish/aliases.fish"
 
-if test -f "{{ .xdg.data_home }}/asdf/asdf.fish"
-  source "{{ .xdg.data_home }}/asdf/asdf.fish"
-end
+{{ if stat (joinPath .xdg.bin_home "mise") -}}
+"{{ .xdg.bin_home }}/mise" activate fish | source
+{{ end }}
