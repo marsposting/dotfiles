@@ -1,5 +1,6 @@
 [data]
-  interactive = {{ stdinIsATTY }}
+  interactive     = {{ stdinIsATTY }}
+  transient       = false
 
 [data.git]
   name            = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
