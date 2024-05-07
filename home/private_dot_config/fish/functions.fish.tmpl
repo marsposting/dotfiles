@@ -1,0 +1,12 @@
+function mcd -d "Make and change directories into"
+    mkdir -p $argv[1]; and cd $argv[1]
+end
+
+{{ if eq .chezmoi.os "darwin" -}}
+function daily_refresh -d "Refresh Homebrew and packages"
+    brew update; and brew upgrade
+end
+function fetch_bundle_id -d "Grab the bundle identifier of an application"
+    mdls -name kMDItemCFBundleIdentifier -r $argv[1]
+end
+{{ end }}

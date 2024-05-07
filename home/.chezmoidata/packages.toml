@@ -5,6 +5,7 @@ brews = [
     "cmake",
     "coreutils",
     "dockutil",
+    "duti",
     "eza",
     "fd",
     "fish",
@@ -21,3 +22,6 @@ brews = [
 casks = ["appcleaner", "iina", "iterm2@beta", "secretive"]
 apps = []
 fonts = ["font-ibm-plex-mono", "font-jetbrains-mono-nerd-font"]
+gamingApps = [
+  "steam", "gog-galaxy", "whisky"
+]

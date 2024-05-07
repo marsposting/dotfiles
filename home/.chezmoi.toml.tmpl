@@ -14,6 +14,35 @@ email           = {{ promptStringOnce . "git.email" "Git email" "user@user.local
 prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
 {{- end }}
 
+[data.profiles]
+developer       = true
+gaming          = true
+server          = false
+work            = false
+
+[data.editors]
+emacs = false
+helix = false
+neovim = true
+vscode = true
+zed = false
+
+[data.shells]
+zsh = true
+fish = true
+nushell = false
+
+[data.toolchains]
+ai = false
+cc = true
+hoon = false
+golang = false
+javascript = false
+python = true
+ruby = false
+rust = false
+shell = false
+
 [data.xdg]
 bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
 cache_home      = "{{ .chezmoi.homeDir }}/.cache"
@@ -25,3 +54,4 @@ state_home      = "{{ .chezmoi.homeDir }}/.local/state"
 pattern = "**/*.plist"
 command = "plutil"
 args = ["-convert", "xml1", "-o", "-", "-"]
+

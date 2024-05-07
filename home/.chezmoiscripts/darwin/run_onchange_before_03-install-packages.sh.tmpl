@@ -14,5 +14,10 @@ cask {{ . | quote }}
 {{ range .packages.darwin.fonts -}}
 cask {{ . | quote }}
 {{ end -}}
+{{ if .profiles.gaming -}}
+{{   range .packages.darwin.gamingApps -}}
+cask {{ . | quote }}
+{{   end -}}
+{{ end -}}
 EOF
 {{ end -}}
