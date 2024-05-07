@@ -1,57 +1,57 @@
 [data]
-interactive     = {{ stdinIsATTY }}
-transient       = false
-editor          = {{ promptStringOnce . "editor" "Primary editor (vscode, neovim, emacs)" "neovim" | quote}}
-pw_manager      = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
-where           = {{ promptStringOnce . "where" "Location (work, home)" "home" | quote }}
+interactive = {{ stdinIsATTY }}
+transient   = false
+editor      = {{ promptStringOnce . "editor" "Primary editor (vscode, neovim, emacs)" "neovim" | quote}}
+pw_manager  = {{ promptStringOnce . "pw_manager" "Enable password manager (1password)" "1password" | quote }}
+where       = {{ promptStringOnce . "where" "Location (work, home)" "home" | quote }}
 
 [data.git]
-name            = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
-email           = {{ promptStringOnce . "git.email" "Git email" "user@user.local" | quote }}
+name        = {{ promptStringOnce . "git.name" "Git name" "user" | quote }}
+email       = {{ promptStringOnce . "git.email" "Git email" "user@user.local" | quote }}
 
 {{ if eq .chezmoi.os "darwin" -}}
 [data.homebrew]
-prefix          = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
+prefix      = "{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local{{ end }}"
 {{- end }}
 
 [data.profiles]
-developer       = true
-gaming          = true
-server          = false
-work            = false
+developer   = true
+gaming      = true
+server      = false
+work        = false
 
 [data.editors]
-emacs = false
-helix = false
-neovim = true
-vscode = true
-zed = false
+emacs       = false
+helix       = false
+neovim      = true
+vscode      = true
+zed         = false
 
 [data.shells]
-zsh = true
-fish = true
-nushell = false
+zsh         = true
+fish        = true
+nushell     = false
 
 [data.toolchains]
-ai = false
-cc = true
-hoon = false
-golang = false
-javascript = false
-python = true
-ruby = false
-rust = false
-shell = false
+ai          = false
+cc          = true
+hoon        = false
+golang      = false
+javascript  = false
+python      = true
+ruby        = false
+rust        = false
+shell       = false
 
 [data.xdg]
-bin_home        = "{{ .chezmoi.homeDir }}/.local/bin"
-cache_home      = "{{ .chezmoi.homeDir }}/.cache"
-config_home     = "{{ .chezmoi.homeDir }}/.config"
-data_home       = "{{ .chezmoi.homeDir }}/.local/share"
-state_home      = "{{ .chezmoi.homeDir }}/.local/state"
+bin_home    = "{{ .chezmoi.homeDir }}/.local/bin"
+cache_home  = "{{ .chezmoi.homeDir }}/.cache"
+config_home = "{{ .chezmoi.homeDir }}/.config"
+data_home   = "{{ .chezmoi.homeDir }}/.local/share"
+state_home  = "{{ .chezmoi.homeDir }}/.local/state"
 
 [[textconv]]
-pattern = "**/*.plist"
-command = "plutil"
-args = ["-convert", "xml1", "-o", "-", "-"]
+pattern     = "**/*.plist"
+command     = "plutil"
+args        = ["-convert", "xml1", "-o", "-", "-"]
 
