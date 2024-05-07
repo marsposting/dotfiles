@@ -11,6 +11,7 @@ set -Ux ASDF_CONFIG_FILE "{{ .xdg.config_home }}/asdf/asdfrc"
 # https://github.com/asdf-vm/asdf/issues/687
 set -Ux ASDF_PYTHON_DEFAULT_PACKAGES_FILE "{{ .xdg.config_home }}/asdf/default-python-packages"
 
+set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -Ux MANWIDTH 88
 
 {{ if eq .chezmoi.os "darwin" -}}
@@ -19,4 +20,3 @@ set -Ux HOMEBREW_NO_ANALYTICS 1
 set -x SSH_AUTH_SOCK "{{ .chezmoi.homeDir }}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh"
 {{   end }}
 {{- end }}
-

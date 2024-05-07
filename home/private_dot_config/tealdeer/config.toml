@@ -1,0 +1,6 @@
+[display]
+use_pager = true
+compact = true
+
+[updates]
+auto_update = true
