@@ -2,6 +2,13 @@
 #!/usr/bin/env zsh
 
 # ----------------------------------------------------------------------------
+# Languages
+# ----------------------------------------------------------------------------
+
+defaults write -g AppleLanguages -array "en" "es" "fr"
+defaults write -g AppleLocale -string "en_US"
+
+# ----------------------------------------------------------------------------
 # Trackpad
 # ----------------------------------------------------------------------------
 
@@ -114,8 +121,8 @@ defaults write com.apple.dock autohide -bool true
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 
-# Don’t show recent applications in Dock
-defaults write com.apple.dock show-recents -bool false
+# Show recent applications in Dock
+defaults write com.apple.dock show-recents -bool true
 
 # Disable the Launchpad gesture (pinch with thumb and three fingers)
 #defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
@@ -142,14 +149,15 @@ chflags nohidden ~/Library
 # Show the /Volumes folder
 sudo chflags nohidden /Volumes
 
+# Don't hide files or extensions
+defaults write com.apple.finder AppleShowAllFiles YES
+defaults write -g AppleShowAllExtensions -bool true
+
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 
 # Disable window animations
 defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
-
-# Show all filename extensions in Finder
-defaults write -g AppleShowAllExtensions -bool true
 
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
@@ -188,9 +196,9 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
 defaults write com.apple.finder FXInfoPanesExpanded -dict \
-  General -bool true \
-  OpenWith -bool true \
-  Privileges -bool true
+	General -bool true \
+	OpenWith -bool true \
+	Privileges -bool true
 
 # Disable disk image verification
 # defaults write com.apple.frameworks.diskimages skip-verify -bool true
@@ -216,7 +224,7 @@ defaults write com.apple.finder FXDefaultSearchScope SCcf
 # List View   : `Nlsv`
 # Column View : `clmv`
 # Cover Flow  : `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle clmv
+defaults write com.apple.finder FXPreferredViewStyle Nlsv
 rm -rf ~/.DS_Store
 
 # Set default path for new windows.
@@ -240,9 +248,6 @@ defaults write -g com.apple.springing.delay -float 0
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# Enable AirDrop over Ethernet and on unsupported Macs running Lion
-# defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 # Column size
 defaults write -g NSBrowserColumnAnimationSpeedMultiplier -float 0.001
@@ -297,6 +302,12 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
 # ----------------------------------------------------------------------------
+# Music
+# ----------------------------------------------------------------------------
+
+defaults write com.apple.Music "userWantsPlaybackNotifications" -bool "false" && killall Music
+
+# ----------------------------------------------------------------------------
 # Safari
 # ----------------------------------------------------------------------------
 
@@ -319,6 +330,7 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 # Enable the Develop menu and the Web Inspector in Safari
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari.SandboxBroker ShowDevelopMenu -bool true
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 
@@ -346,6 +358,9 @@ defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool fals
 # Remove useless icons from Safari’s bookmarks bar
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 
+# Show hovering overlay on links
+defaults write com.apple.Safari ShowOverlayStatusBar -bool true
+
 # Disable plug-ins
 # defaults write com.apple.Safari WebKitPluginsEnabled -bool false
 # defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false
@@ -369,4 +384,46 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # 1: Prompt for each website once each day
 # 2: Prompt for each website one time only
 defaults write com.apple.Safari SafariGeolocationPermissionPolicy -int 0
+
+# Disable private click measurement
+defaults write com.apple.Safari "WebKitPreferences.privateClickMeasurementEnabled" -int 0
+
+# Yes, yes, I know the features
+defaults write com.apple.Safari DidShowWhatsNewInSafari17 -int 1
+
+# ----------------------------------------------------------------------------
+# Time Machine
+# ----------------------------------------------------------------------------
+
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# ----------------------------------------------------------------------------
+# Transmission
+# ----------------------------------------------------------------------------
+
+# Use `~/Documents/Torrents` to store incomplete downloads
+defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
+defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Documents/Torrents"
+
+# Use `~/Downloads` to store completed downloads
+defaults write org.m0k.transmission DownloadLocationConstant -bool true
+
+# Don’t prompt for confirmation before downloading
+defaults write org.m0k.transmission DownloadAsk -bool false
+defaults write org.m0k.transmission MagnetOpenAsk -bool false
+
+# Don’t prompt for confirmation before removing non-downloading active transfers
+defaults write org.m0k.transmission CheckRemoveDownloading -bool true
+
+# Trash original torrent files
+defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
+
+# Hide the donate message
+defaults write org.m0k.transmission WarningDonate -bool false
+# Hide the legal disclaimer
+defaults write org.m0k.transmission WarningLegal -bool false
+
+# Randomize port on launch
+defaults write org.m0k.transmission RandomPort -bool true
 {{ end }}
+
