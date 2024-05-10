@@ -1,0 +1,32 @@
+data.location=$XDG_STATE_HOME/task
+journal.time=on
+# punt: push back one day
+alias.punt=modify wait:1d
+alias.someday=mod +someday wait:someday
+alias.dailystatus=status:completed end.after:today all
+# Don't bother me about more urgent tasks
+nag=
+# contexts
+context.work=+work
+context.accounts=+accounts
+context.apartment=+apartment
+context.computer=+computer
+context.exercise=+exercise
+context.food=+food
+context.games=+games
+context.hacking=+hacking
+context.hardware=+hardware
+context.ideas=+ideas
+context.inspiration=+inspiration
+context.links=+links
+context.media=+media
+context.moving=+moving
+context.organization=+organization
+context.personal=+personal
+context.programming=+programming
+context.travel=+travel
+context.windows=+windows
+context.salt=+salt
+context.download=+download
+context.telemetry=+telemetry
+context.achievements=+achievements

@@ -16,6 +16,7 @@ brews = [
     "ripgrep",
     "shellcheck",
     "sqlite3",
+    "task",
     "tealdeer",
     "xz",
 ]
